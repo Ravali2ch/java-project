@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ReUseLoop - Admin Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>♻️ ReUseLoop</h1>
+        <p>Admin Dashboard</p>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/admin">Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Submitted E-Waste Records</h2>
+
+        {% if devices %}
+
+        <table border="1" cellpadding="8" cellspacing="0" width="100%">
+
+            <tr>
+                <th>ID</th>
+                <th>Device</th>
+                <th>Condition</th>
+                <th>Age</th>
+                <th>Recommendation</th>
+                <th>Action</th>
+            </tr>
+
+            {% for device in devices %}
+
+            <tr>
+                <td>{{ device['id'] }}</td>
+                <td>{{ device['device'] }}</td>
+                <td>{{ device['condition'] }}</td>
+                <td>{{ device['age'] }}</td>
+                <td>{{ device['recommendation'] }}</td>
+
+                <td>
+                    <form action="/delete/{{ device['id'] }}" method="POST"
+                          onsubmit="return confirm('Are you sure you want to delete this record?')">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <p>No e-waste records have been submitted yet.</p>
+
+        {% endif %}
+
+    </main>
+
+    <footer>
+        <p>ReUseLoop | Reduce, Reuse, Recycle</p>
+    </footer>
+
+</body>
+</html>

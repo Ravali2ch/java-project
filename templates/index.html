@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ReUseLoop - E-Waste Management</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>♻️ ReUseLoop</h1>
+        <p>Give your old electronics a new life!</p>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/admin">Admin Dashboard</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <h2>Smart E-Waste Recommendations</h2>
+
+        <p>
+            Enter your electronic device details
+            to get a suitable recommendation.
+        </p>
+
+        <form method="POST">
+
+            <label for="device">Electronic Device</label>
+
+            <select id="device" name="device" required>
+                <option value="">Select Device</option>
+                <option>Mobile Phone</option>
+                <option>Laptop</option>
+                <option>Charger</option>
+                <option>Keyboard</option>
+                <option>Tablet</option>
+                <option>Other</option>
+            </select>
+
+
+            <label for="condition">Device Condition</label>
+
+            <select id="condition" name="condition" required>
+                <option value="">Select Condition</option>
+                <option>Working</option>
+                <option>Repairable</option>
+                <option>Damaged</option>
+            </select>
+
+
+            <label for="age">Device Age</label>
+
+            <select id="age" name="age" required>
+                <option value="">Select Age</option>
+                <option value="0-2">0–2 years</option>
+                <option value="3-5">3–5 years</option>
+                <option value="6+">More than 5 years</option>
+            </select>
+
+
+            <button type="submit">
+                Get Recommendation
+            </button>
+
+        </form>
+
+
+        {% if recommendation %}
+
+        <section class="result">
+            <h3>Your Recommendation</h3>
+            <p>{{ recommendation }}</p>
+        </section>
+
+        {% endif %}
+
+    </main>
+
+
+    <footer>
+        <p>ReUseLoop | Reduce, Reuse, Recycle</p>
+    </footer>
+
+</body>
+</html>
